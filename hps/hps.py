@@ -17,7 +17,7 @@ import sys
 def sphere2cart(s, stretch = 10):
    return stretch * np.array([np.sin(s[0]) * np.cos(s[1]), np.sin(s[0]) * np.sin(s[1]), np.cos(s[0])])
 
-def hps(MESH_FN = '../meshes/in.obj', NUM_SAMP = 1000):
+def hps(MESH_FN = '../meshes/in.obj', NUM_SAMP = 1000, Conc, Tau, R, T, Mass):
     '''
     Calculate hits per second
 
@@ -80,7 +80,8 @@ def hps(MESH_FN = '../meshes/in.obj', NUM_SAMP = 1000):
             c = sum((ConvexHull(proj.T).area for proj in projs_it))
             print 'End getting all convex hulls'
 
-            return c
+            k = Conc * Tau / 4 / np.pi * np.sqrt(2 * R * T / Mass / np.pi)
+            return  k * c / (2 * np.pi / NUM_SAMP) ** 2
 
             print 'Final answer: ' + str(c)
 
