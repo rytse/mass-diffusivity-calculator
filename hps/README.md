@@ -1,0 +1,1 @@
+Calculates hits per second
